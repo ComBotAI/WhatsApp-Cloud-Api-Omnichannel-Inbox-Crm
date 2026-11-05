@@ -15,6 +15,7 @@
 
 ## Contents
 
+- [Screenshots](#screenshots)
 - [Why this project](#why-this-project)
 - [Features](#features)
 - [How it works: the Com Bot AI Limited backend](#how-it-works-the-com-bot-ai-limited-backend)
@@ -27,6 +28,25 @@
 - [License](#license)
 
 ---
+
+## Screenshots
+
+<table>
+  <tr>
+    <td align="center" width="25%"><img src="docs/screenshots/01-inbox.png" width="200" alt="Shared omnichannel team inbox for WhatsApp, Instagram and RCS"><br><sub><b>Inbox</b></sub></td>
+    <td align="center" width="25%"><img src="docs/screenshots/02-chat.png" width="200" alt="WhatsApp chat with reactions, media, voice notes and templates"><br><sub><b>Chat</b></sub></td>
+    <td align="center" width="25%"><img src="docs/screenshots/03-contacts.png" width="200" alt="Contacts list with tags and segments"><br><sub><b>Contacts</b></sub></td>
+    <td align="center" width="25%"><img src="docs/screenshots/04-contact.png" width="200" alt="CRM contact profile with stage, customer type, details and notes"><br><sub><b>Contact profile</b></sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="25%"><img src="docs/screenshots/05-board.png" width="200" alt="Kanban sales board that moves contacts by stage"><br><sub><b>Kanban board</b></sub></td>
+    <td align="center" width="25%"><img src="docs/screenshots/06-campaigns.png" width="200" alt="WhatsApp template campaigns list with delivery stats"><br><sub><b>Campaigns</b></sub></td>
+    <td align="center" width="25%"><img src="docs/screenshots/07-campaign.png" width="200" alt="Campaign report with sent, delivered, read and replied counts"><br><sub><b>Campaign report</b></sub></td>
+    <td align="center" width="25%"><img src="docs/screenshots/08-new-campaign.png" width="200" alt="Create a bulk WhatsApp campaign from an approved template"><br><sub><b>New campaign</b></sub></td>
+  </tr>
+</table>
+
+<sub>Sample business and contacts are fictional.</sub>
 
 ## Why this project
 

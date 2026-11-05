@@ -254,27 +254,48 @@ const resource = (name: string) =>
 /** A stand-in for the CPaaS client that answers from the sample workspace. */
 export const previewClient = (): CrmClient => new Proxy({} as Rec, { get: (_t, name: string) => resource(name) }) as unknown as CrmClient;
 
+/** The first chat is a longer conversation, with reactions on both sides. */
+const LONG_CHAT: [boolean, string][] = [
+  [true, 'Hi! Is the maroon silk saree still available?'],
+  [false, 'Yes it is 😊 Sharing more photos now.'],
+  [false, 'It comes with a matching blouse piece. ₹4,850 with free shipping.'],
+  [true, 'Lovely, please reserve one for me!'],
+  [false, 'Done! Reserved under your name. Payment link coming up 🙌'],
+  [true, 'Paid. Can it reach Mumbai by Friday?'],
+  [false, 'Yes, it ships today and arrives Thursday 🚚'],
+];
+
 /** Sample chats and their threads, in the shape the inbox socket delivers. */
 export const previewInbox = () => {
-  const chats = contacts.slice(0, 12).map((c, i) => ({ ...c, last_interaction_props: { text: CHAT_LINES[i % CHAT_LINES.length][2] } }));
+  const chats = contacts
+    .slice(0, 12)
+    .map((c, i) => ({ ...c, last_interaction_props: { text: i === 0 ? LONG_CHAT[LONG_CHAT.length - 1][1] : CHAT_LINES[i % CHAT_LINES.length][2] } }));
   const threads = Object.fromEntries(
     chats.map((c, i) => {
-      const lines = CHAT_LINES[i % CHAT_LINES.length];
-      const msg = (k: number, inbound: boolean, text: string) => ({
+      const lines: [boolean, string][] =
+        i === 0 ? LONG_CHAT : CHAT_LINES[i % CHAT_LINES.length].map((text, k) => [k !== 1, text] as [boolean, string]);
+      const n = lines.length + (i === 0 ? 2 : 0);
+      const msg = (k: number, inbound: boolean, content: Rec) => ({
         id: `${c.id}-m${k}`,
         message_id: `${c.id}-m${k}`,
         contact: c.id,
         channel: 'preview-wa',
         identifier: c.profile.whatsapp.identifier,
-        content: { type: 'text', text: { body: text } },
+        content,
         direction: inbound ? 'inbound' : 'outbound',
         source: inbound ? 'contact' : 'agent',
         status: inbound ? 'received' : 'read',
-        timestamp: c.last_seen - (3 - k) * 240,
+        timestamp: c.last_seen - (n - k) * 240,
         agent: inbound ? null : 'preview',
         receipts: {},
       });
-      return [c.id, [msg(0, true, lines[0]), msg(1, false, lines[1]), msg(2, true, lines[2])]];
+      const thread = lines.map(([inbound, text], k) => msg(k, inbound, { type: 'text', text: { body: text } }));
+      if (i === 0) {
+        const react = (k: number, inbound: boolean, target: number, emoji: string) =>
+          msg(k, inbound, { type: 'reaction', reaction: { message_id: `${c.id}-m${target}`, emoji } });
+        thread.push(react(lines.length, true, 2, '😍'), react(lines.length + 1, false, 5, '🙏'));
+      }
+      return [c.id, thread];
     }),
   );
   return { chats, threads };
