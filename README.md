@@ -125,8 +125,8 @@ Whether you are a marketing agency, a SaaS reseller, a WhatsApp solution provide
 ### Setup
 
 ```bash
-git clone https://github.com/udghatan-dev/inbox-and-crm-app.git
-cd inbox-and-crm-app
+git clone https://github.com/ComBotAI/WhatsApp-Cloud-Api-Omnichannel-Inbox-Crm.git
+cd WhatsApp-Cloud-Api-Omnichannel-Inbox-Crm
 npm install
 cp .env.example .env    # then fill in the values below
 ```

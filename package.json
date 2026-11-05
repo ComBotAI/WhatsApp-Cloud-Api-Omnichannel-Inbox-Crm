@@ -7,7 +7,7 @@
   "homepage": "https://com.bot",
   "repository": {
     "type": "git",
-    "url": "https://github.com/udghatan-dev/inbox-and-crm-app.git"
+    "url": "https://github.com/ComBotAI/WhatsApp-Cloud-Api-Omnichannel-Inbox-Crm.git"
   },
   "main": "index.ts",
   "dependencies": {
