@@ -2,7 +2,7 @@
  * Saved segments: named contact filters stored on the CPaaS account. They
  * hold no contact ids, so a segment always matches whoever fits it right now.
  */
-import type { ContactFilter } from 'ab-ecosystem-cpass';
+import type { ContactFilter } from '@ab-ecosystem/cpaas';
 
 import { andFilters, buildContactFilter, countActiveFilters, FILTER_TAG, MAX_CONDITIONS, type LeadFilter } from '@/lib/filters';
 import { crm } from './client';

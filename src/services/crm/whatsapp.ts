@@ -9,7 +9,7 @@
  * Sends use scheduled messages: create one a minute out, then `sendNow`. That
  * is plain REST (no socket), and the same call schedules a send for later.
  */
-import type { Channel, CreateTemplateInput, Template, TemplateCategory } from 'ab-ecosystem-cpass';
+import type { Channel, CreateTemplateInput, Template, TemplateCategory } from '@ab-ecosystem/cpaas';
 
 import { formatPhone } from '@/lib/phone';
 import { readJson, writeJson } from '@/services/storage';

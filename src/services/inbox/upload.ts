@@ -8,7 +8,7 @@
  * not through a JS Blob, which React Native can send empty or mistyped.
  * A `content://` file (shared from another Android app) is copied first.
  */
-import type { MediaKind } from 'ab-ecosystem-cpass';
+import type { MediaKind } from '@ab-ecosystem/cpaas';
 import { Directory, File, Paths } from 'expo-file-system';
 import { FileSystemUploadType, uploadAsync } from 'expo-file-system/legacy';
 

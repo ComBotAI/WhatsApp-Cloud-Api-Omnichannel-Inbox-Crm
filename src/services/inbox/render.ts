@@ -4,7 +4,7 @@
  * templates, interactive buttons/lists and the replies to them, reactions);
  * anything unrecognised becomes `unknown` rather than an error.
  */
-import type { Template } from 'ab-ecosystem-cpass';
+import type { Template } from '@ab-ecosystem/cpaas';
 
 import { parseTemplate, type ParsedTemplate } from '@/services/crm/whatsapp';
 

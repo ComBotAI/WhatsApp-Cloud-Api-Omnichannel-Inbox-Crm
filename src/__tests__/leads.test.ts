@@ -1,4 +1,4 @@
-import type { Contact } from 'ab-ecosystem-cpass';
+import type { Contact } from '@ab-ecosystem/cpaas';
 
 import { fieldText, toLead } from '@/services/crm/leads';
 

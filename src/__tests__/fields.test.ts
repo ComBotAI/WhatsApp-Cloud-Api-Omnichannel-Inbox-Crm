@@ -1,4 +1,4 @@
-import type { CustomField } from 'ab-ecosystem-cpass';
+import type { CustomField } from '@ab-ecosystem/cpaas';
 
 import { coerceFieldValue, formatFieldValue, propsWithOptions } from '@/services/crm/fields';
 import { fieldDisplay, toLead } from '@/services/crm/leads';

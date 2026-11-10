@@ -14,7 +14,7 @@
  * `{{v1}}`; fixed text stays literal. `sendTest` sends the fully rendered
  * message to one lead first, so the template can be checked before launch.
  */
-import type { Campaign, CampaignMessageRecord, CampaignMessageStats, CampaignRepeat, CampaignReplyBreakdown, Template } from 'ab-ecosystem-cpass';
+import type { Campaign, CampaignMessageRecord, CampaignMessageStats, CampaignRepeat, CampaignReplyBreakdown, Template } from '@ab-ecosystem/cpaas';
 
 import { buildContactFilter, type LeadFilter } from '@/lib/filters';
 import { normalizePhone } from '@/lib/phone';

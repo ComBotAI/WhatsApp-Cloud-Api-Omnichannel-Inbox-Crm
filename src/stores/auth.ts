@@ -8,7 +8,7 @@
  * Signing in while already signed in (`beginAddAccount`) adds another account;
  * the existing ones stay signed in and keep syncing.
  */
-import type { AccountContext, AccountOption, MappedProfile } from 'ab-ecosystem-sso';
+import type { AccountContext, AccountOption, MappedProfile } from '@ab-ecosystem/sso';
 import { useQuery } from '@tanstack/react-query';
 import { create } from 'zustand';
 

@@ -11,7 +11,7 @@
  */
 import '@/polyfills';
 
-import { CrmApiError, CrmClient, CrmConfigError } from 'ab-ecosystem-cpass';
+import { CrmApiError, CrmClient, CrmConfigError } from '@ab-ecosystem/cpaas';
 
 import { env } from '@/config/env';
 import { isWebPreview, previewClient } from '@/lib/webPreview';

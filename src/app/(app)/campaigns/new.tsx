@@ -10,7 +10,7 @@
  * A test send to one lead (picked by search) delivers the real message, with
  * that lead's values, before anything goes out; the preview shows it too.
  */
-import type { Template } from 'ab-ecosystem-cpass';
+import type { Template } from '@ab-ecosystem/cpaas';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import * as DocumentPicker from 'expo-document-picker';
 import { router, useLocalSearchParams } from 'expo-router';

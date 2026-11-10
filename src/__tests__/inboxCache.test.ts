@@ -1,4 +1,4 @@
-import type { Chat } from 'ab-ecosystem-cpass';
+import type { Chat } from '@ab-ecosystem/cpaas';
 
 import { restoreInbox, startInboxCache } from '@/services/inbox/cache';
 import { inboxOf, useInboxStore } from '@/services/inbox/store';

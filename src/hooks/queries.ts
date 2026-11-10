@@ -3,7 +3,7 @@
  * invalidate precisely. Lists are cached to MMKV through the persister set up
  * in the root layout, so the app paints offline.
  */
-import type { Contact, ContactTag, Segment, Template } from 'ab-ecosystem-cpass';
+import type { Contact, ContactTag, Segment, Template } from '@ab-ecosystem/cpaas';
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
 

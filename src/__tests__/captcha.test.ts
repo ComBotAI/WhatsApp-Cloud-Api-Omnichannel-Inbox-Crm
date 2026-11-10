@@ -1,4 +1,4 @@
-import type { CaptchaConfig } from 'ab-ecosystem-sso';
+import type { CaptchaConfig } from '@ab-ecosystem/sso';
 
 import { buildCaptchaHtml, captchaHeight, captchaMode, captchaScriptUrl } from '@/components/captcha/html';
 

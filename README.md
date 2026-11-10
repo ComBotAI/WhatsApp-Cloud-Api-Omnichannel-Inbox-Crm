@@ -96,9 +96,9 @@ The app is a client. All data, messaging and business logic live in the **Com Bo
 
 | Part of the panel | What it does for the app | Package / setting |
 | --- | --- | --- |
-| **Auth as a Service (SSO)** | Sign-up, login, OTP and email verification, 2FA, captcha, password reset, account and workspace picker, team members and roles | `ab-ecosystem-sso`, `EXPO_PUBLIC_SSO_URL` |
-| **CPaaS CRM gateway** | Contacts, custom fields, tags, segments, notes, quick replies, channels, WhatsApp templates, campaigns, media uploads, push registration | `ab-ecosystem-cpass`, `EXPO_PUBLIC_CPASS_BASE_URL` |
-| **Live inbox socket** | Real-time messages, delivery and read receipts, chat assignment, typing state | `ab-ecosystem-cpass` Inbox, `EXPO_PUBLIC_INBOX_URL` |
+| **Auth as a Service (SSO)** | Sign-up, login, OTP and email verification, 2FA, captcha, password reset, account and workspace picker, team members and roles | `@ab-ecosystem/sso`, `EXPO_PUBLIC_SSO_URL` |
+| **CPaaS CRM gateway** | Contacts, custom fields, tags, segments, notes, quick replies, channels, WhatsApp templates, campaigns, media uploads, push registration | `@ab-ecosystem/cpaas`, `EXPO_PUBLIC_CPASS_BASE_URL` |
+| **Live inbox socket** | Real-time messages, delivery and read receipts, chat assignment, typing state | `@ab-ecosystem/cpaas` Inbox, `EXPO_PUBLIC_INBOX_URL` |
 | **Channel connections** | WhatsApp Business API (Meta embedded signup), Instagram and RCS, wallet and usage | Configured in the panel |
 
 Each workspace has an **Access ID** (project id). Users enter it at sign-in or scan it as a QR code (`inboxcampaign://access/<id>`), so **one published app can serve many businesses**, each with its own data.

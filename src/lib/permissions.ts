@@ -1,6 +1,6 @@
 /**
  * The permission keys the app checks before showing an option, the same keys
- * the CPaaS server enforces on each call (node_modules/ab-ecosystem-cpass/docs).
+ * the CPaaS server enforces on each call (node_modules/@ab-ecosystem/cpaas/docs).
  * Hiding is a courtesy: the server refuses regardless.
  *
  * Check with `useCan(P.contacts.delete)` from `@/stores/auth`.

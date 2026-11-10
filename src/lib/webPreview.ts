@@ -4,7 +4,7 @@
  * be laid out and captured (store screenshots). Compiled out of production
  * builds (`__DEV__`). Every phone number is one digit short of a real one.
  */
-import type { CrmClient } from 'ab-ecosystem-cpass';
+import type { CrmClient } from '@ab-ecosystem/cpaas';
 import { Platform } from 'react-native';
 
 type Rec = Record<string, unknown>;

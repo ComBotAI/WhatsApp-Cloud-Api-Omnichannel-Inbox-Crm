@@ -3,7 +3,7 @@
  * Custom field values are kept as they are, keyed by slug, and described by
  * the workspace's own field list (`useFields`).
  */
-import type { Contact, ContactFilterEntry, ContactTag, CreateContactInput, UpdateContactInput } from 'ab-ecosystem-cpass';
+import type { Contact, ContactFilterEntry, ContactTag, CreateContactInput, UpdateContactInput } from '@ab-ecosystem/cpaas';
 
 import { FILTER_TAG } from '@/lib/filters';
 import { normalizePhone } from '@/lib/phone';

@@ -3,7 +3,7 @@
  * list key and local file over to it (so the chat doesn't redraw it). Kept apart from the
  * socket manager so it can be tested on its own.
  */
-import type { Message } from 'ab-ecosystem-cpass';
+import type { Message } from '@ab-ecosystem/cpaas';
 
 import type { ChatMessage } from './store';
 

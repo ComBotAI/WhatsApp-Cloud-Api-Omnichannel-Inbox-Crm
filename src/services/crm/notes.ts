@@ -1,5 +1,5 @@
 /** Notes on a contact: the CPaaS contact-notes resource, newest first. */
-import type { ContactNote } from 'ab-ecosystem-cpass';
+import type { ContactNote } from '@ab-ecosystem/cpaas';
 
 import { crm } from './client';
 

@@ -3,7 +3,7 @@
  * the CPaaS socket. Other signed-in accounts stay connected in the
  * background, so switching here never loses their messages.
  */
-import type { Chat, ChatListFilter } from 'ab-ecosystem-cpass';
+import type { Chat, ChatListFilter } from '@ab-ecosystem/cpaas';
 import { Redirect, router } from 'expo-router';
 import {
   Archive,

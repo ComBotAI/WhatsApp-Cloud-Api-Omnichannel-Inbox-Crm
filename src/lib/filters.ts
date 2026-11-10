@@ -6,7 +6,7 @@
  * segments are passed through as `segment` and narrowed by this filter — the
  * server intersects the two.
  */
-import type { ContactFilter, ContactFilterEntry } from 'ab-ecosystem-cpass';
+import type { ContactFilter, ContactFilterEntry } from '@ab-ecosystem/cpaas';
 
 /** Provenance tag on filters this app builds (free-form; the server ignores it). */
 export const FILTER_TAG = 'app';

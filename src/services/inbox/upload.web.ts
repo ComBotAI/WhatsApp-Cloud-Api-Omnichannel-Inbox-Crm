@@ -1,5 +1,5 @@
 /** Web: the browser's `File` / `Blob` goes up as is (its size and type are exact). */
-import type { MediaKind } from 'ab-ecosystem-cpass';
+import type { MediaKind } from '@ab-ecosystem/cpaas';
 
 import { crmFor } from '@/services/crm/client';
 

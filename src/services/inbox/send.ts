@@ -3,7 +3,7 @@
  * notes, stickers and reactions, optionally as a reply to a message. Each send shows a bubble at
  * once (local file preview while it uploads) that the stored row replaces.
  */
-import type { Chat, Message } from 'ab-ecosystem-cpass';
+import type { Chat, Message } from '@ab-ecosystem/cpaas';
 
 import { describeCrmError } from '@/services/crm/client';
 import { senderContext, sendSession } from '@/services/crm/whatsapp';

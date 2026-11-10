@@ -4,7 +4,7 @@
  * converted like attachments picked in a chat), then the text, which can be
  * edited before sending. The chat opens afterwards so its delivery shows.
  */
-import type { Chat } from 'ab-ecosystem-cpass';
+import type { Chat } from '@ab-ecosystem/cpaas';
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { clearSharedPayloads as dropShared, useIncomingShare } from 'expo-sharing';

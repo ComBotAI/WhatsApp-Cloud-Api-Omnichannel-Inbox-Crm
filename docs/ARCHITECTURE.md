@@ -6,8 +6,8 @@ A WhatsApp Business inbox and CRM on Expo (React Native 0.88, Expo SDK 58, Expo 
 
 | Concern | Package | How we use it |
 | --- | --- | --- |
-| Login, signup, 2FA, account picker, `/me`, the team list for chat transfer | `ab-ecosystem-sso` | **Types only.** The package ships React DOM screens and exports no plain `login`/`signup` functions, so it cannot render in React Native. `src/services/sso/client.ts` is a thin fetch client against the same `/api/v1/projects/:projectId/...` endpoints. Its TypeScript types are imported with `import type`, which erases at build time. |
-| Contacts, custom fields, tags, segments, notes, quick replies, channels, templates, campaigns, notifications, inbox | `ab-ecosystem-cpass` | **Used directly.** Two polyfills load first (`src/polyfills.ts`): `react-native-url-polyfill` and an `AbortSignal.timeout` shim. `origin` is set explicitly because React Native sends no `origin` header. The token is a resolver function reading the accounts store, so account switches never rebuild the client. |
+| Login, signup, 2FA, account picker, `/me`, the team list for chat transfer | `@ab-ecosystem/sso` | **Types only.** The package ships React DOM screens and exports no plain `login`/`signup` functions, so it cannot render in React Native. `src/services/sso/client.ts` is a thin fetch client against the same `/api/v1/projects/:projectId/...` endpoints. Its TypeScript types are imported with `import type`, which erases at build time. |
+| Contacts, custom fields, tags, segments, notes, quick replies, channels, templates, campaigns, notifications, inbox | `@ab-ecosystem/cpaas` | **Used directly.** Two polyfills load first (`src/polyfills.ts`): `react-native-url-polyfill` and an `AbortSignal.timeout` shim. `origin` is set explicitly because React Native sends no `origin` header. The token is a resolver function reading the accounts store, so account switches never rebuild the client. |
 
 ## What the app creates on the workspace: nothing
 

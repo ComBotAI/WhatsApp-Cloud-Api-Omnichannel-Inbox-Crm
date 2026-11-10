@@ -3,7 +3,7 @@
  * body with variables and formatting, footer, buttons, and a live WhatsApp
  * preview. Saves as a draft or submits straight to Meta for approval.
  */
-import type { TemplateCategory } from 'ab-ecosystem-cpass';
+import type { TemplateCategory } from '@ab-ecosystem/cpaas';
 import { useQueryClient } from '@tanstack/react-query';
 import { useLocalSearchParams } from 'expo-router';
 import { goBack } from '@/lib/nav';

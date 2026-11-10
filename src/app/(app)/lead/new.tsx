@@ -14,7 +14,7 @@ import { formatPhone, normalizePhone } from '@/lib/phone';
 import { describeCrmError } from '@/services/crm/client';
 import { coerceFieldValue, dropdownOptions, fieldDate, fieldLabel, formatFieldValue, isNumericField } from '@/services/crm/fields';
 import type { Lead, LeadInput } from '@/services/crm/leads';
-import type { CustomField } from 'ab-ecosystem-cpass';
+import type { CustomField } from '@ab-ecosystem/cpaas';
 import { RequireCan } from '@/components/RequireCan';
 import { P } from '@/lib/permissions';
 

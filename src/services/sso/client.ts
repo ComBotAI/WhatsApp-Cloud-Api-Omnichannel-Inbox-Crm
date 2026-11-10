@@ -1,7 +1,7 @@
 /**
  * Native client for the partner-ecosystem Auth-as-a-Service API.
  *
- * Why this exists: `ab-ecosystem-sso` ships React DOM screens (react-dom,
+ * Why this exists: `@ab-ecosystem/sso` ships React DOM screens (react-dom,
  * localStorage, Tailwind) and exports no plain `login` / `signup` / `verify-2fa`
  * functions, so it cannot run inside React Native. Every endpoint, body and
  * response branch below was taken from the package's compiled source, and the
@@ -23,7 +23,7 @@ import type {
   SignupRequest,
   TeamMember,
   VerifyTwoFactorRequest,
-} from 'ab-ecosystem-sso';
+} from '@ab-ecosystem/sso';
 
 import { Platform } from 'react-native';
 

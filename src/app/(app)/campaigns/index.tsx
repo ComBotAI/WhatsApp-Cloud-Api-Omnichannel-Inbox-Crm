@@ -4,7 +4,7 @@
  * on which channel, when it goes (or went) out, to how many, and, once it has
  * run, how many read and replied. Opens a campaign's report, or starts a new one.
  */
-import type { Campaign, CampaignStatus } from 'ab-ecosystem-cpass';
+import type { Campaign, CampaignStatus } from '@ab-ecosystem/cpaas';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { router } from 'expo-router';
 import { CalendarClock, CheckCheck, FileText, Megaphone, MessageCircleReply, Plus, Radio, Repeat, Send, Users } from 'lucide-react-native';

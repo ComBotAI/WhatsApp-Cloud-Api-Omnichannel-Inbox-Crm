@@ -7,7 +7,7 @@
  * 3. A media header takes a photo, video or document from the phone.
  * 4. Send now, or schedule it (it then shows on the lead's scheduled list).
  */
-import type { Template } from 'ab-ecosystem-cpass';
+import type { Template } from '@ab-ecosystem/cpaas';
 import { router, useLocalSearchParams } from 'expo-router';
 import { goBack } from '@/lib/nav';
 import { CalendarClock, ChevronLeft, FileText, Paperclip, Plus, Search, Send } from 'lucide-react-native';

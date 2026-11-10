@@ -4,7 +4,7 @@
  * its own. Contact conditions (tags, stages, fields, segments) have their own
  * button beside it.
  */
-import type { ChatListFilter } from 'ab-ecosystem-cpass';
+import type { ChatListFilter } from '@ab-ecosystem/cpaas';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';

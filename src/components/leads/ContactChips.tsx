@@ -3,7 +3,7 @@
  * and the chat header. A field shows here when the workspace marks it "show
  * as label" in CPaaS. Shows a few and counts the rest.
  */
-import type { ContactTag } from 'ab-ecosystem-cpass';
+import type { ContactTag } from '@ab-ecosystem/cpaas';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { Text } from '@/components/ui';

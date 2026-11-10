@@ -2,7 +2,7 @@
  * Web captcha: loads the provider script into the document and renders the
  * widget into a plain div (the View's DOM node). Same handle as native.
  */
-import type { CaptchaConfig } from 'ab-ecosystem-sso';
+import type { CaptchaConfig } from '@ab-ecosystem/sso';
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';

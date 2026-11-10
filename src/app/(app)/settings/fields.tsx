@@ -4,7 +4,7 @@
  * choose which fields show as labels. Every dropdown is also a board. The app
  * creates no fields of its own.
  */
-import type { CustomField } from 'ab-ecosystem-cpass';
+import type { CustomField } from '@ab-ecosystem/cpaas';
 import { useQueryClient } from '@tanstack/react-query';
 import { Pencil, Plus, Trash2, X } from 'lucide-react-native';
 import { useState } from 'react';

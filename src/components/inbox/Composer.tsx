@@ -4,7 +4,7 @@
  * replying to a message. Files WhatsApp would refuse are rejected when picked,
  * with the reason; unsupported image formats are converted to JPEG first.
  */
-import type { Chat } from 'ab-ecosystem-cpass';
+import type { Chat } from '@ab-ecosystem/cpaas';
 import { AudioModule, RecordingPresets, setAudioModeAsync, useAudioRecorder, useAudioRecorderState } from 'expo-audio';
 import { Image } from 'expo-image';
 import { CalendarClock, Camera, FileText, LayoutTemplate, Images, Mic, Paperclip, Send, Sticker, Trash2, Video as VideoIcon, X } from 'lucide-react-native';

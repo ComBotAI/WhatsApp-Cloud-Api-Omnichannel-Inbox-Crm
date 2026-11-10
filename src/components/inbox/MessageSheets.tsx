@@ -5,7 +5,7 @@
  *    in plain words, plus the raw message for support;
  *  - ForwardSheet: pick a chat to send copies of one or more messages to.
  */
-import type { Chat } from 'ab-ecosystem-cpass';
+import type { Chat } from '@ab-ecosystem/cpaas';
 import * as Clipboard from 'expo-clipboard';
 import { CircleAlert, Copy, Download, Forward, Info, RefreshCw, Reply, Trash2 } from 'lucide-react-native';
 import { useState } from 'react';

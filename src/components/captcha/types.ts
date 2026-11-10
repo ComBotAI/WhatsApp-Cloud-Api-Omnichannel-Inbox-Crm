@@ -1,4 +1,4 @@
-import type { CaptchaConfig } from 'ab-ecosystem-sso';
+import type { CaptchaConfig } from '@ab-ecosystem/sso';
 
 export type CaptchaHandle = {
   /** Resolves a token to send as `captchaToken`; rejects when the user still has to solve a visible widget. */

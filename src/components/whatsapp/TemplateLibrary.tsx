@@ -1,5 +1,5 @@
 /** A channel's templates: search, status filter, sync from Meta, preview, delete, create. */
-import type { Template } from 'ab-ecosystem-cpass';
+import type { Template } from '@ab-ecosystem/cpaas';
 import { useQueryClient } from '@tanstack/react-query';
 import { router } from 'expo-router';
 import { MessageCircle, Plus, RefreshCw, Trash2 } from 'lucide-react-native';

@@ -1,5 +1,5 @@
 /** A row showing the chosen approved template; tapping opens a searchable list (from the saved copy). */
-import type { Template } from 'ab-ecosystem-cpass';
+import type { Template } from '@ab-ecosystem/cpaas';
 import { ChevronDown } from 'lucide-react-native';
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';

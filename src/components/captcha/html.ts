@@ -9,7 +9,7 @@
  *
  * Messages: { type: 'ready' | 'token' | 'expired' | 'error' | 'needs_interaction', token?, message? }
  */
-import type { CaptchaConfig } from 'ab-ecosystem-sso';
+import type { CaptchaConfig } from '@ab-ecosystem/sso';
 
 export type CaptchaMode = 'v2' | 'v3' | 'hcaptcha';
 

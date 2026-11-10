@@ -1,5 +1,5 @@
 /** Options for a chat: info, transfer, done / close, automation, chatbot, tags, pin, read state, archive, block, delete. */
-import type { Chat } from 'ab-ecosystem-cpass';
+import type { Chat } from '@ab-ecosystem/cpaas';
 import {
   Archive,
   ArchiveRestore,

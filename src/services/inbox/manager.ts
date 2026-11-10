@@ -8,8 +8,8 @@
  * the new one. Sockets close when an account signs out or goes back to
  * phone-WhatsApp mode.
  */
-import type { Chat, ChatListFilter, ContactFilterEntry, Message } from 'ab-ecosystem-cpass';
-import { Inbox } from 'ab-ecosystem-cpass/realtime';
+import type { Chat, ChatListFilter, ContactFilterEntry, Message } from '@ab-ecosystem/cpaas';
+import { Inbox } from '@ab-ecosystem/cpaas/realtime';
 import * as Notifications from 'expo-notifications';
 import { AppState, Platform } from 'react-native';
 

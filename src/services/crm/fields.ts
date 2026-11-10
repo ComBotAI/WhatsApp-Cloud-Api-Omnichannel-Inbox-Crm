@@ -5,7 +5,7 @@
  * used as a board is one the workspace already has (or one the user adds from
  * Settings → Fields). Values live in `contact.custom_field_hash`, keyed by slug.
  */
-import type { CustomField, CustomFieldType, JsonObject, UpdateCustomFieldInput } from 'ab-ecosystem-cpass';
+import type { CustomField, CustomFieldType, JsonObject, UpdateCustomFieldInput } from '@ab-ecosystem/cpaas';
 
 import { crm, crmFor } from './client';
 

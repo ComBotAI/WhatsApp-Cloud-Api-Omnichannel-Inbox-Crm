@@ -9,7 +9,7 @@
  * convention, and filled in for the lead in front of the user when a reply is
  * used. The editor works with the app's `[[field]]` tokens and converts.
  */
-import type { CannedReply, MessageContent } from 'ab-ecosystem-cpass';
+import type { CannedReply, MessageContent } from '@ab-ecosystem/cpaas';
 
 import type { Lead } from './leads';
 import { crm } from './client';

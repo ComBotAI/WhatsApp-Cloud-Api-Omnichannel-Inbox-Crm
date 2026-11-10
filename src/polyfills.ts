@@ -1,6 +1,6 @@
 /**
  * Polyfills the CPaaS SDK needs on React Native. Import this module first,
- * before anything that touches `ab-ecosystem-cpass`.
+ * before anything that touches `@ab-ecosystem/cpaas`.
  *
  * - `URL` / `URLSearchParams`: Hermes ships a partial `URL`; the SDK builds every
  *   request with `new URL(...)` and `searchParams.set`, so the full polyfill is required.

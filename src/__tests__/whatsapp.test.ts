@@ -1,4 +1,4 @@
-import type { Template } from 'ab-ecosystem-cpass';
+import type { Template } from '@ab-ecosystem/cpaas';
 
 import { parseAccessId } from '@/services/accessId';
 import { fieldSlug } from '@/services/crm/fields';

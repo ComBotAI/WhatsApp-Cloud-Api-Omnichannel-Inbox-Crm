@@ -7,7 +7,7 @@
  * quoted message for replies, delivery ticks for outgoing ones, and which
  * channel (WhatsApp number, Instagram, RCS…) the message travelled over.
  */
-import type { Template } from 'ab-ecosystem-cpass';
+import type { Template } from '@ab-ecosystem/cpaas';
 import { useAudioPlayer, useAudioPlayerStatus } from 'expo-audio';
 import { Image } from 'expo-image';
 import * as WebBrowser from 'expo-web-browser';

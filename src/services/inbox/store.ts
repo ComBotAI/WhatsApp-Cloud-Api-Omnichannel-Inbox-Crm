@@ -3,7 +3,7 @@
  * the Inbox tab and chat screens. Every signed-in account in WhatsApp-API mode
  * has its own slice, so switching accounts never drops anyone's messages.
  */
-import type { Chat, Message } from 'ab-ecosystem-cpass';
+import type { Chat, Message } from '@ab-ecosystem/cpaas';
 import { create } from 'zustand';
 
 export type ConnState = 'idle' | 'connecting' | 'connected' | 'error';

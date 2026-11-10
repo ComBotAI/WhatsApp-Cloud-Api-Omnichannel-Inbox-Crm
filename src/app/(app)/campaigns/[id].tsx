@@ -5,7 +5,7 @@
  * the provider's error), and one-tap re-targets of the people who did not
  * read, did not reply or failed.
  */
-import type { CampaignMessageStatus } from 'ab-ecosystem-cpass';
+import type { CampaignMessageStatus } from '@ab-ecosystem/cpaas';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { router, useLocalSearchParams } from 'expo-router';
 import { Ban, CalendarClock, CheckCheck, FileText, MessageCircleReply, Pencil, Radio, RefreshCw, Send, Target, Trash2, TriangleAlert } from 'lucide-react-native';

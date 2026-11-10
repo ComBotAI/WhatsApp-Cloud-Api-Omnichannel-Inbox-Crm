@@ -4,7 +4,7 @@
  * outside this app; here they are only managed.
  *
  * Everything that lives with Meta (business profile, registration, test sends)
- * goes through `getProp` / `setProp`. See node_modules/ab-ecosystem-cpass/docs/channels.
+ * goes through `getProp` / `setProp`. See node_modules/@ab-ecosystem/cpaas/docs/channels.
  */
 import type {
   ActivityLog,
@@ -12,7 +12,7 @@ import type {
   ChannelType,
   UpdateChannelDetailsInput,
   WalletLog,
-} from 'ab-ecosystem-cpass';
+} from '@ab-ecosystem/cpaas';
 
 import { formatPhone } from '@/lib/phone';
 

@@ -3,7 +3,7 @@
  * for a while), start a chatbot, edit tags, and chat info (assignee,
  * automation, ad referral, reply windows, blocks).
  */
-import type { Chat } from 'ab-ecosystem-cpass';
+import type { Chat } from '@ab-ecosystem/cpaas';
 import { useQuery } from '@tanstack/react-query';
 import { Bot, ExternalLink, Pause, Play, Trash2 } from 'lucide-react-native';
 import { useState } from 'react';

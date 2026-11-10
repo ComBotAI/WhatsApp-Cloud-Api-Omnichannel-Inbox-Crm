@@ -9,7 +9,7 @@
  * (Today, Yesterday, the date) like WhatsApp, and each one shows the channel
  * it came over, since one contact can write on several.
  */
-import type { Template } from 'ab-ecosystem-cpass';
+import type { Template } from '@ab-ecosystem/cpaas';
 import { keepPreviousData, useQuery, useQueryClient } from '@tanstack/react-query';
 import { router } from 'expo-router';
 import * as Clipboard from 'expo-clipboard';
