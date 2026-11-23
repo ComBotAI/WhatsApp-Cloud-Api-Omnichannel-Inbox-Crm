@@ -8,7 +8,7 @@ import { ScrollViewStyleReset, useServerDocumentContext } from 'expo-router/html
 import { Children, isValidElement, type PropsWithChildren } from 'react';
 
 const SITE = 'https://dialerapp.com.bot';
-const TITLE = 'Inbox And Campaigns — WhatsApp inbox, contacts & campaigns';
+const TITLE = 'Team Inbox & Campaigns — WhatsApp inbox, contacts & campaigns';
 const DESCRIPTION =
   'A shared WhatsApp Business inbox with contacts, boards, templates and campaigns, built on your CPaaS workspace. Android, iPhone and web, in 17 languages.';
 const IMAGE = `${SITE}/og-image.png`;
@@ -33,7 +33,7 @@ export default function Root({ children }: PropsWithChildren) {
 
         {hasTitle ? null : <title>{TITLE}</title>}
         {hasDescription ? null : <meta name="description" content={DESCRIPTION} />}
-        <meta name="application-name" content="Inbox And Campaigns" />
+        <meta name="application-name" content="Team Inbox & Campaigns" />
         <meta name="theme-color" content="#0F0F1A" />
         <meta name="color-scheme" content="dark light" />
         <link rel="canonical" href={SITE} />
@@ -42,14 +42,14 @@ export default function Root({ children }: PropsWithChildren) {
         <link rel="manifest" href="/manifest.webmanifest" />
 
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Inbox And Campaigns" />
+        <meta property="og:site_name" content="Team Inbox & Campaigns" />
         <meta property="og:url" content={SITE} />
         <meta property="og:title" content={TITLE} />
         <meta property="og:description" content={DESCRIPTION} />
         <meta property="og:image" content={IMAGE} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Inbox And Campaigns: WhatsApp inbox, contacts and campaigns on one screen" />
+        <meta property="og:image:alt" content="Team Inbox & Campaigns: WhatsApp inbox, contacts and campaigns on one screen" />
         <meta property="og:locale" content="en_IN" />
 
         <meta name="twitter:card" content="summary_large_image" />

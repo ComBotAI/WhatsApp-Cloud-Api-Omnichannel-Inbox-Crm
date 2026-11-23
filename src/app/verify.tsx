@@ -19,7 +19,7 @@ import type { Metadata } from 'expo-router/server';
 
 /** Web: this page's title and description for search and link previews. */
 export function generateMetadata(): Metadata {
-  return { title: 'Verify your email · Inbox And Campaigns', description: 'Confirm your email address to finish setting up Inbox And Campaigns.' };
+  return { title: 'Verify your email · Team Inbox & Campaigns', description: 'Confirm your email address to finish setting up Team Inbox & Campaigns.' };
 }
 
 export default function VerifyEmail() {

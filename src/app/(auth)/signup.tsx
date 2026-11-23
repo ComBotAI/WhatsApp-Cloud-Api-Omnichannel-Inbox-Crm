@@ -21,8 +21,8 @@ const FALLBACK_CURRENCIES = ['INR', 'USD'];
 /** Web: this page's title and description for search and link previews. */
 export function generateMetadata(): Metadata {
   return {
-    title: 'Create your account · Inbox And Campaigns',
-    description: 'Create an Inbox And Campaigns account for your team: WhatsApp inbox, contacts and campaigns in one app.',
+    title: 'Create your account · Team Inbox & Campaigns',
+    description: 'Create an Team Inbox & Campaigns account for your team: WhatsApp inbox, contacts and campaigns in one app.',
   };
 }
 

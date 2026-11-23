@@ -232,7 +232,7 @@ export default function MoreScreen() {
         <View style={[styles.footer, { width: '100%' }]}>
           <BrandMark size={26} />
           <Text variant="micro" tone="faint">
-            Inbox And Campaigns
+            Team Inbox & Campaigns
           </Text>
         </View>
       </View>

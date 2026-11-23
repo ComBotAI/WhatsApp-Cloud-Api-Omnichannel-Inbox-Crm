@@ -89,7 +89,7 @@ const notifyIncoming = async (acct: string, m: Message) => {
   const hidden = hasPin(acct);
   await Notifications.scheduleNotificationAsync({
     content: {
-      title: hidden ? workspace || 'Inbox And Campaigns' : name || 'WhatsApp',
+      title: hidden ? workspace || 'Team Inbox & Campaigns' : name || 'WhatsApp',
       subtitle: !hidden && useAccountsStore.getState().sessions.length > 1 ? workspace : undefined,
       body: hidden ? i18next.t('lock.hiddenMessage') : previewOf(m),
       data: { url: `inboxcampaign://chat/${m.contact}`, accountId: acct },

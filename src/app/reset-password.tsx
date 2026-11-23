@@ -19,7 +19,7 @@ import type { Metadata } from 'expo-router/server';
 
 /** Web: this page's title and description for search and link previews. */
 export function generateMetadata(): Metadata {
-  return { title: 'Choose a new password · Inbox And Campaigns', description: 'Set a new password for your Inbox And Campaigns account.' };
+  return { title: 'Choose a new password · Team Inbox & Campaigns', description: 'Set a new password for your Team Inbox & Campaigns account.' };
 }
 
 export default function ResetPassword() {

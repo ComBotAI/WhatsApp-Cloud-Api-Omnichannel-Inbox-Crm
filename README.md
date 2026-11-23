@@ -200,7 +200,7 @@ Default identifiers in this repository:
 
 | | |
 | --- | --- |
-| Android package / iOS bundle ID | `com.inbox.campaign` |
+| Android package / iOS bundle ID | `com.team.inbox` |
 | Expo slug | `inbox-and-campaigns` |
 | Link scheme | `inboxcampaign://` (WhatsApp signup returns to `inboxcampaign://channel-connected`) |
 

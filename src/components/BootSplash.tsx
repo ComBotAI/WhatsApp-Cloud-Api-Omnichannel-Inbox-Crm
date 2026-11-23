@@ -41,7 +41,7 @@ export function BootSplash({ visible }: { visible: boolean }) {
         <Animated.View style={[styles.iconWrap, { transform: [{ scale: pop }] }]}>
           <Image source={ICON} style={styles.icon} contentFit="cover" />
         </Animated.View>
-        <Text style={styles.name}>Inbox And Campaigns</Text>
+        <Text style={styles.name}>Team Inbox & Campaigns</Text>
         <Text style={styles.tag}>WhatsApp · Contacts · Campaigns</Text>
         <View style={styles.track}>
           <Animated.View

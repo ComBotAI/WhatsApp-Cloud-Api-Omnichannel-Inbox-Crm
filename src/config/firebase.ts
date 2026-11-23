@@ -4,10 +4,10 @@
  * sync with public/firebase-messaging-sw.js, which can't import this file.
  */
 export const firebaseWebConfig = {
-  apiKey: 'AIzaSyDibLRBg4CRgwc3cCIDDGcZdBAur-Vek8U',
-  authDomain: 'inbox-campaign-app.firebaseapp.com',
-  projectId: 'inbox-campaign-app',
-  storageBucket: 'inbox-campaign-app.firebasestorage.app',
-  messagingSenderId: '266799455756',
-  appId: '1:266799455756:web:2a33e76a08b46c6e31d829',
+  apiKey: 'AIzaSyCRmM3JoEoPZrxhSDQgvkb-l_behuN5BTc',
+  authDomain: 'team-inbox-cf6af.firebaseapp.com',
+  projectId: 'team-inbox-cf6af',
+  storageBucket: 'team-inbox-cf6af.firebasestorage.app',
+  messagingSenderId: '282238246056',
+  appId: '1:282238246056:web:83e69a3c956268cca3369d',
 } as const;

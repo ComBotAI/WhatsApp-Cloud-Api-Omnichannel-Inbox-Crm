@@ -1224,7 +1224,7 @@
   "share": {
     "title": "共有",
     "emptyTitle": "共有するものがありません",
-    "emptyBody": "他のアプリからテキスト、写真、動画、ファイルを共有して Inbox And Campaigns を選んでください。",
+    "emptyBody": "他のアプリからテキスト、写真、動画、ファイルを共有して Team Inbox & Campaigns を選んでください。",
     "addMessage": "メッセージを追加",
     "sendTo": "送信先",
     "noChats": "チャットが見つかりません",

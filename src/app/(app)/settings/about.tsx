@@ -12,7 +12,7 @@ export default function AboutScreen() {
     <Screen title={t('settings.about')} back>
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', gap: 12, paddingBottom: 80 }}>
         <BrandMark size={84} />
-        <Text variant="h2">Inbox And Campaigns</Text>
+        <Text variant="h2">Team Inbox & Campaigns</Text>
         <Text tone="muted">v{version}</Text>
       </View>
     </Screen>

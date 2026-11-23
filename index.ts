@@ -24,7 +24,7 @@ if (utils) {
       shown = true;
       // Keep the app alive and show what went wrong.
       try {
-        Alert.alert('Inbox And Campaigns hit an error', describe(error));
+        Alert.alert('Team Inbox & Campaigns hit an error', describe(error));
         return;
       } catch {
         // fall through to the default handler
@@ -38,5 +38,5 @@ try {
   // eslint-disable-next-line @typescript-eslint/no-require-imports -- must load after the catcher is installed
   require('expo-router/entry');
 } catch (error) {
-  Alert.alert('Inbox And Campaigns could not start', describe(error));
+  Alert.alert('Team Inbox & Campaigns could not start', describe(error));
 }

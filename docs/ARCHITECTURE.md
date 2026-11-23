@@ -1,4 +1,4 @@
-# Inbox And Campaigns: architecture
+# Team Inbox & Campaigns: architecture
 
 A WhatsApp Business inbox and CRM on Expo (React Native 0.88, Expo SDK 58, Expo Router), for Android, iPhone and the web.
 

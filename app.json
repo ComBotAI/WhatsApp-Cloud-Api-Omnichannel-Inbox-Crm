@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Inbox And Campaigns",
+    "name": "Team Inbox & Campaigns",
     "slug": "inbox-and-campaigns",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -10,7 +10,7 @@
     "ios": {
       "icon": "./assets/images/icon.png",
       "supportsTablet": false,
-      "bundleIdentifier": "com.inbox.campaign",
+      "bundleIdentifier": "com.team.inbox",
       "googleServicesFile": "./GoogleService-Info.plist",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
@@ -23,7 +23,7 @@
       }
     },
     "android": {
-      "package": "com.inbox.campaign",
+      "package": "com.team.inbox",
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "backgroundColor": "#4F46E5",
@@ -52,6 +52,7 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
+      "./plugins/withOptionalHardwareFeatures",
       "expo-router",
       [
         "expo-splash-screen",
@@ -83,14 +84,14 @@
       [
         "expo-camera",
         {
-          "cameraPermission": "Allow Inbox And Campaigns to use the camera to scan your Access ID QR code.",
+          "cameraPermission": "Allow Team Inbox & Campaigns to use the camera to scan your Access ID QR code.",
           "recordAudioAndroid": false
         }
       ],
       [
         "expo-image-picker",
         {
-          "photosPermission": "Allow Inbox And Campaigns to attach photos to WhatsApp messages."
+          "photosPermission": "Allow Team Inbox & Campaigns to attach photos to WhatsApp messages."
         }
       ],
       "expo-font",
@@ -105,7 +106,7 @@
       [
         "expo-audio",
         {
-          "microphonePermission": "Allow Inbox And Campaigns to record voice notes for WhatsApp.",
+          "microphonePermission": "Allow Team Inbox & Campaigns to record voice notes for WhatsApp.",
           "enableBackgroundPlayback": false
         }
       ],
@@ -116,8 +117,8 @@
       [
         "expo-media-library",
         {
-          "photosPermission": "Allow Inbox And Campaigns to save photos and videos from your chats.",
-          "savePhotosPermission": "Allow Inbox And Campaigns to save photos and videos from your chats to your library.",
+          "photosPermission": "Allow Team Inbox & Campaigns to save photos and videos from your chats.",
+          "savePhotosPermission": "Allow Team Inbox & Campaigns to save photos and videos from your chats to your library.",
           "granularPermissions": []
         }
       ],
@@ -155,7 +156,7 @@
       [
         "expo-contacts",
         {
-          "contactsPermission": "Allow Inbox And Campaigns to read your contacts so you can add them to your CRM. You choose automatic or manual sync, and can block contacts from ever being added."
+          "contactsPermission": "Allow Team Inbox & Campaigns to read your contacts so you can add them to your CRM. You choose automatic or manual sync, and can block contacts from ever being added."
         }
       ]
     ],

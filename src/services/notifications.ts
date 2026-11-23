@@ -75,7 +75,7 @@ export const registerPushDevice = async ({ ask = Platform.OS !== 'web' } = {}): 
     await crm().notifications.subscribe({
       token,
       platform: Platform.OS === 'web' ? 'web' : Platform.OS === 'ios' ? 'ios' : 'android',
-      device_label: `Inbox And Campaigns on ${Platform.OS}`,
+      device_label: `Team Inbox & Campaigns on ${Platform.OS}`,
     });
     return { ok: true };
   } catch (error) {

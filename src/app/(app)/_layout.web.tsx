@@ -78,7 +78,7 @@ export default function AppLayoutWeb() {
   const section = [...work, ...whatsapp].find((i) => i.show && isActive(pathname, i.match)) ?? (isActive(pathname, settings.match) ? settings : null);
   const sectionLabel = section?.label;
   useEffect(() => {
-    if (typeof document !== 'undefined') document.title = sectionLabel ? `${sectionLabel} · Inbox And Campaigns` : 'Inbox And Campaigns';
+    if (typeof document !== 'undefined') document.title = sectionLabel ? `${sectionLabel} · Team Inbox & Campaigns` : 'Team Inbox & Campaigns';
   }, [sectionLabel]);
 
   const row = (i: Item) => {

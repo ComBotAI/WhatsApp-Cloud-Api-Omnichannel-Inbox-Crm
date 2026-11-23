@@ -4,7 +4,7 @@ import Svg, { Circle, Defs, LinearGradient, Path, Rect, Stop } from 'react-nativ
 import { Text } from '@/components/ui/Text';
 import { useTheme } from '@/theme/ThemeProvider';
 
-export const APP_NAME = 'Inbox And Campaigns';
+export const APP_NAME = 'Team Inbox & Campaigns';
 
 /** The app mark: a chat bubble (inbox) with a megaphone badge (campaigns), on the brand gradient. */
 export function BrandMark({ size = 64 }: { size?: number }) {

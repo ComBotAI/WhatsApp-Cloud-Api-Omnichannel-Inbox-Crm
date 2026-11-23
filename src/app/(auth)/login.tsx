@@ -19,7 +19,7 @@ import type { Metadata } from 'expo-router/server';
 
 /** Web: this page's title and description for search and link previews. */
 export function generateMetadata(): Metadata {
-  return { title: 'Log in · Inbox And Campaigns', description: 'Log in to Inbox And Campaigns to work your WhatsApp inbox, contacts and campaigns.' };
+  return { title: 'Log in · Team Inbox & Campaigns', description: 'Log in to Team Inbox & Campaigns to work your WhatsApp inbox, contacts and campaigns.' };
 }
 
 export default function LoginScreen() {

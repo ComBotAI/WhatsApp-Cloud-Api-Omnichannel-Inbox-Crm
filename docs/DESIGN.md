@@ -1,4 +1,4 @@
-# Inbox And Campaigns: design system and screen plan
+# Team Inbox & Campaigns: design system and screen plan
 
 ## Principles
 
@@ -38,7 +38,7 @@
 
 | Screen | Layout |
 | --- | --- |
-| Login / Signup / Forgot / OTP | Gradient top third with the Inbox And Campaigns logo (chat bubble + megaphone badge); form in a white card that rises over it; single full-width primary button; captcha inside the card. |
+| Login / Signup / Forgot / OTP | Gradient top third with the Team Inbox & Campaigns logo (chat bubble + megaphone badge); form in a white card that rises over it; single full-width primary button; captcha inside the card. |
 | Account picker | Hero + list of workspace rows (initial avatar, role, current tick). |
 | **Inbox (home)** | Hero with live status and search; view chips (All, Unread, Mine, Open, Archived) and filter buttons in one sideways row; chat rows with label chips and unread badges. Long-press to multi-select. |
 | Chat | WhatsApp-style thread, composer with media, voice notes, quick replies and templates; ⋯ menu for transfer, tags, bot, automation, archive, block. |

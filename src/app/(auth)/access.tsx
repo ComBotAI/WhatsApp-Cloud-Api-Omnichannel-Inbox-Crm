@@ -32,8 +32,8 @@ import type { Metadata } from 'expo-router/server';
 /** Web: this page's title and description for search and link previews. */
 export function generateMetadata(): Metadata {
   return {
-    title: 'Sign in · Inbox And Campaigns',
-    description: 'Enter your company Access ID to sign in to Inbox And Campaigns: your WhatsApp inbox, contacts and campaigns in one app.',
+    title: 'Sign in · Team Inbox & Campaigns',
+    description: 'Enter your company Access ID to sign in to Team Inbox & Campaigns: your WhatsApp inbox, contacts and campaigns in one app.',
   };
 }
 
