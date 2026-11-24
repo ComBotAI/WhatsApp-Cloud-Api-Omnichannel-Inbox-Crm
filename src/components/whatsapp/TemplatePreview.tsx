@@ -9,24 +9,25 @@ import { Fragment } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { Text } from '@/components/ui';
+import { linkify } from '@/components/inbox/LinkText';
 import type { ParsedTemplate, TemplateButton } from '@/services/crm/whatsapp';
 import { useTheme } from '@/theme/ThemeProvider';
 
 const WA_BG = { light: '#EFE7DE', dark: '#0B141A' };
 const BUBBLE = { light: '#FFFFFF', dark: '#202C33' };
 
-/** Renders text with `{{var}}` tokens replaced, or highlighted when empty. */
-function Filled({ text, values, style }: { text: string; values: (name: string) => string | undefined; style?: object }) {
+/** Renders text with `{{var}}` tokens replaced, or highlighted when empty. `linkColor`: make links in it tappable. */
+function Filled({ text, values, style, linkColor }: { text: string; values: (name: string) => string | undefined; style?: object; linkColor?: string }) {
   const parts = text.split(/(\{\{\s*[a-zA-Z0-9_]+\s*\}\})/g);
   return (
     <Text style={style}>
       {parts.map((p, i) => {
         const m = /^\{\{\s*([a-zA-Z0-9_]+)\s*\}\}$/.exec(p);
-        if (!m) return <Fragment key={i}>{renderBold(p)}</Fragment>;
+        if (!m) return <Fragment key={i}>{renderBold(p, linkColor)}</Fragment>;
         const v = values(m[1]);
         return v ? (
           <Text key={i} style={{ fontWeight: '600' }}>
-            {v}
+            {linkColor ? linkify(v, linkColor) : v}
           </Text>
         ) : (
           <Text key={i} style={styles.token}>
@@ -38,21 +39,22 @@ function Filled({ text, values, style }: { text: string; values: (name: string) 
   );
 }
 
-/** WhatsApp's *bold* and _italic_ markers. */
-const renderBold = (s: string) =>
-  s.split(/(\*[^*\n]+\*|_[^_\n]+_)/g).map((chunk, i) =>
-    chunk.startsWith('*') && chunk.endsWith('*') && chunk.length > 2 ? (
+/** WhatsApp's *bold* and _italic_ markers (and, with `linkColor`, tappable links). */
+const renderBold = (s: string, linkColor?: string) =>
+  s.split(/(\*[^*\n]+\*|_[^_\n]+_)/g).map((chunk, i) => {
+    const inner = (t: string) => (linkColor ? linkify(t, linkColor, `${i}-`) : t);
+    return chunk.startsWith('*') && chunk.endsWith('*') && chunk.length > 2 ? (
       <Text key={i} style={{ fontWeight: '700' }}>
-        {chunk.slice(1, -1)}
+        {inner(chunk.slice(1, -1))}
       </Text>
     ) : chunk.startsWith('_') && chunk.endsWith('_') && chunk.length > 2 ? (
       <Text key={i} style={{ fontStyle: 'italic' }}>
-        {chunk.slice(1, -1)}
+        {inner(chunk.slice(1, -1))}
       </Text>
     ) : (
-      chunk
-    ),
-  );
+      <Fragment key={i}>{inner(chunk)}</Fragment>
+    );
+  });
 
 export function TemplatePreview({
   template,
@@ -132,7 +134,7 @@ export function TemplatePreview({
             <Filled text={header.text} values={headerValues ?? values} style={{ color: textColor, fontWeight: '700', fontSize: 15, lineHeight: 20 }} />
           ) : null}
           {body ? (
-            <Filled text={body} values={values} style={{ color: textColor, fontSize: 14.5, lineHeight: 20 }} />
+            <Filled text={body} values={values} style={{ color: textColor, fontSize: 14.5, lineHeight: 20 }} linkColor={onButtonPress ? link : undefined} />
           ) : (
             <Text style={{ color: muted, fontStyle: 'italic' }}>…</Text>
           )}

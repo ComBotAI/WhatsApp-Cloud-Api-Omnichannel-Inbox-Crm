@@ -123,7 +123,16 @@ const wire = (acct: string, inbox: Inbox) => [
       const next: Chat = {
         ...chat,
         last_seen: isOutbound(m) ? chat.last_seen : m.timestamp,
-        last_interaction_props: { ...(chat.last_interaction_props ?? {}), preview: previewOf(m), at: m.timestamp, direction: m.direction },
+        last_interaction_props: {
+          ...(chat.last_interaction_props ?? {}),
+          preview: previewOf(m),
+          // The message itself too, so the list can draw a template with its text once templates load, and its ticks.
+          content: m.content,
+          at: m.timestamp,
+          direction: isOutbound(m) ? 'outbound' : 'inbound',
+          status: m.status,
+          message_id: m.message_id,
+        },
         chat_metadata: { ...chat.chat_metadata, unread },
       };
       return { chats: [next, ...a.chats.filter((c) => c.id !== chat.id)] };
@@ -137,7 +146,13 @@ const wire = (acct: string, inbox: Inbox) => [
           threads[cid] = list.map((x) => (x.message_id === u.message_id ? { ...x, status: u.status, error: (u.error as string) ?? x.error } : x));
         }
       }
-      return { threads };
+      // The chat list's ticks: a fetched newest message, or the chat whose last message this is.
+      const lasts = { ...(a.lasts ?? {}) };
+      for (const [cid, x] of Object.entries(lasts)) if (x.message_id === u.message_id) lasts[cid] = { ...x, status: u.status };
+      const chats = a.chats.some((c) => c.last_interaction_props?.message_id === u.message_id)
+        ? a.chats.map((c) => (c.last_interaction_props?.message_id === u.message_id ? { ...c, last_interaction_props: { ...c.last_interaction_props, status: u.status } } : c))
+        : a.chats;
+      return { threads, chats, lasts };
     }),
   ),
   inbox.on('chat.action', (r) => (r.chat ? upsertChat(acct, r.chat) : removeChat(acct, r.id))),
@@ -314,6 +329,28 @@ export const loadThread = async (acct: string, chatId: string, older = false) =>
       threadDone: { ...cur.threadDone, [chatId]: page.length < 40 },
     };
   });
+};
+
+/** chatId → the `last_seen` its newest message was fetched for (one request per chat per change). */
+const lastAsked = new Map<string, number>();
+
+/**
+ * Fetches a chat's newest message for the chat list when its thread isn't loaded: the chat's
+ * own preview has no template text and no delivery status, the message has both.
+ */
+export const ensureLastMessage = (acct: string, chat: Chat) => {
+  const key = `${acct}:${chat.id}`;
+  if (inboxOf(acct).threads[chat.id]?.length || lastAsked.get(key) === chat.last_seen) return;
+  lastAsked.set(key, chat.last_seen);
+  const inbox = inboxFor(acct);
+  if (!inbox) return lastAsked.delete(key);
+  void inbox.messages
+    .list(chat.id, { limit: 1 })
+    .then((page) => {
+      const newest = page.reduce<Message | null>((a, m) => (!a || m.timestamp >= a.timestamp ? m : a), null);
+      if (newest) patch(acct, (a) => ({ lasts: { ...(a.lasts ?? {}), [chat.id]: newest } }));
+    })
+    .catch(() => lastAsked.delete(key));
 };
 
 export const openChat = async (acct: string, chatId: string) => {

@@ -9,8 +9,7 @@
  * (Today, Yesterday, the date) like WhatsApp, and each one shows the channel
  * it came over, since one contact can write on several.
  */
-import type { Template } from '@ab-ecosystem/cpaas';
-import { keepPreviousData, useQuery, useQueryClient } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { router } from 'expo-router';
 import * as Clipboard from 'expo-clipboard';
 import {
@@ -23,6 +22,7 @@ import {
   EllipsisVertical,
   FileText,
   Forward,
+  Phone,
   Reply,
   Trash2,
   UserRoundCog,
@@ -50,6 +50,7 @@ import { describeCrmError } from '@/services/crm/client';
 import { useTabBarInset } from '@/components/navigation/FloatingTabBar';
 import { Avatar, Button, Sheet, Text } from '@/components/ui';
 import { goBack } from '@/lib/nav';
+import { callPhone } from '@/lib/actions';
 import { formatPhone } from '@/lib/phone';
 import { automationState, closeChat, deleteMessage, inboxFor, loadThread, openChat } from '@/services/inbox/manager';
 import { useNow } from '@/hooks/useNow';
@@ -57,7 +58,7 @@ import { useChannels } from '@/hooks/channels';
 import { channelColor, channelName, channelType } from '@/services/crm/channels';
 import { chatDayLabel, dayjs } from '@/lib/time';
 import { useTemplates, useWaChannels } from '@/hooks/queries';
-import { cachedTemplates } from '@/services/crm/whatsapp';
+import { useTemplateLookup } from '@/hooks/useTemplateLookup';
 import { channelFor, identifierOf, sendReaction } from '@/services/inbox/send';
 import { renderContent, templateMedia, type Rendered } from '@/services/inbox/render';
 import { useAccountInbox, type ChatMessage } from '@/services/inbox/store';
@@ -92,7 +93,6 @@ export function ChatView({ id, embedded = false }: { id: string; embedded?: bool
   const { colors, scheme } = useTheme();
   const insets = useSafeAreaInsets();
   const bar = useTabBarInset();
-  const qc = useQueryClient();
   const acct = useAccountsStore((s) => s.activeId);
   const inbox = useAccountInbox(acct);
   const chat = inbox.chats.find((c) => c.id === id);
@@ -159,23 +159,7 @@ export function ChatView({ id, embedded = false }: { id: string; embedded?: bool
     return map;
   }, [waChannels.data, allChannels.data]);
   const replyChannel = channelMap.get(channelId);
-  const lookup = useCallback(
-    (name: string, language: string): Template | undefined => {
-      const match = (x: Template) => x.name === name && (!language || x.language === language);
-      for (const [, data] of qc.getQueriesData<Template[]>({ queryKey: ['wa', 'templates'] })) {
-        const hit = data?.find(match);
-        if (hit) return hit;
-      }
-      for (const ch of waChannels.data ?? []) {
-        const hit = cachedTemplates(ch.id)?.templates.find(match);
-        if (hit) return hit;
-      }
-      return undefined;
-    },
-    // `dataUpdatedAt`: a new identity once templates arrive, so bubbles re-render with them.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [qc, waChannels.data, templates.dataUpdatedAt],
-  );
+  const lookup = useTemplateLookup(channelId);
 
   // A template not on the phone yet (created after the last download): fetch the list once.
   const unknownTemplate = thread.some((m) => {
@@ -439,6 +423,17 @@ export function ChatView({ id, embedded = false }: { id: string; embedded?: bool
             {chat ? <ContactChips hash={chat.custom_field_hash as Record<string, unknown> | undefined} tags={chat.tags} scroll /> : null}
           </Pressable>
           {/* Tapping the name opens the contact; these are quick actions on the chat itself. */}
+          {phone ? (
+            <Pressable
+              onPress={() => void callPhone(phone)}
+              hitSlop={8}
+              style={styles.hbtn}
+              accessibilityRole="button"
+              accessibilityLabel={t('common.call')}
+            >
+              <Phone size={20} color={colors.textMuted} />
+            </Pressable>
+          ) : null}
           {chat && canUpdate ? (
             <Pressable
               onPress={() => setChatMenu('status')}

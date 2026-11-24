@@ -23,9 +23,9 @@ import {
   X,
   UserPlus,
 } from 'lucide-react-native';
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, FlatList, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, FlatList, Pressable, ScrollView, StyleSheet, View, type ListViewToken } from 'react-native';
 
 import { AccountPill } from '@/components/accounts/AccountSwitcher';
 import { TAB_BAR_SPACE } from '@/components/navigation/FloatingTabBar';
@@ -37,7 +37,7 @@ import { useTeam } from '@/hooks/queries';
 import { ChatActionsSheet } from '@/components/inbox/ChatActionsSheet';
 import { ChatView } from '@/components/inbox/ChatView';
 import { useDesktop } from '@/hooks/useDesktop';
-import { chatAction, listFilteredChats, loadChats, phoneQuery, reconnectInboxes, searchChats, transferChat, type ChatAction } from '@/services/inbox/manager';
+import { chatAction, ensureLastMessage, listFilteredChats, loadChats, phoneQuery, reconnectInboxes, searchChats, transferChat, type ChatAction } from '@/services/inbox/manager';
 import { quickContact } from '@/services/crm/leads';
 import { countInboxFilters, EMPTY_INBOX_FILTER, InboxFilterSheet, type InboxFilter } from '@/components/inbox/InboxFilterSheet';
 import { showAlert } from '@/lib/dialog';
@@ -49,6 +49,8 @@ import { usePins } from '@/services/inbox/pins';
 import { identifierOf } from '@/services/inbox/send';
 import { useAccountInbox } from '@/services/inbox/store';
 import { previewText, renderContent } from '@/services/inbox/render';
+import { useTemplateLookup, type TemplateLookup } from '@/hooks/useTemplateLookup';
+import { StatusTicks } from '@/components/inbox/MessageBubble';
 import { useAccountsStore } from '@/stores/accounts';
 import { useTheme } from '@/theme/ThemeProvider';
 import { P } from '@/lib/permissions';
@@ -69,21 +71,35 @@ const when = (ts?: number) => {
 };
 
 const nameOf = (c: Chat) => [c.name?.first_name, c.name?.last_name].filter(Boolean).join(' ') || formatPhone(identifierOf(c)) || '—';
+type ThreadMsg = { content: unknown; direction?: string; status?: string; pending?: boolean; timestamp?: number };
+const OUT_STATES = ['sent', 'delivered', 'read', 'failed'];
+const VIEWABILITY = { itemVisiblePercentThreshold: 10, minimumViewTime: 150 };
+
 /**
- * The chat's last message, one line (like WhatsApp). CPaaS keeps a preview on the chat
- * (`last_interaction_props`, shaped differently by source); else the newest message this
- * phone has for the chat.
+ * The chat's last message, one line (like WhatsApp), and its ticks when we sent it. CPaaS keeps
+ * a preview on the chat (`last_interaction_props`, shaped differently by source); the newest
+ * message this phone has for the chat wins when it is at least as new. A template is shown
+ * with its text (looked up among the account's templates), not just 📋.
  */
-const previewOf = (c: Chat, thread?: { content: unknown }[]) => {
+const previewOf = (c: Chat, thread: ThreadMsg[] | undefined, fetched: ThreadMsg | undefined, lookup: TemplateLookup): { text: string; status: string; pending: boolean } => {
   const p = (c.last_interaction_props ?? {}) as Record<string, unknown>;
-  const text = (v: unknown) => (typeof v === 'string' ? v.trim() : '');
-  const direct = text(p.preview) || text(p.text) || text(p.body) || text(p.caption) || text((p.text as { body?: unknown } | undefined)?.body);
-  if (direct) return direct;
-  for (const src of [p.content, p.message, p.type ? p : undefined]) {
-    if (src && typeof src === 'object' && renderContent(src).kind !== 'unknown') return previewText(src);
+  const fromThread = thread?.[thread.length - 1];
+  // The newest of: the loaded thread's last message, and the one fetched for this list.
+  const last = fromThread && fetched ? ((fetched.timestamp ?? 0) > (fromThread.timestamp ?? 0) ? fetched : fromThread) : (fromThread ?? fetched);
+  const at = typeof p.at === 'number' ? p.at : 0;
+  if (last && (last.timestamp ?? 0) >= at) {
+    const out = last.direction === 'outbound' || (!!last.status && last.status !== 'received');
+    return { text: previewText(last.content, lookup), status: out ? (last.status ?? 'sent') : '', pending: !!last.pending };
   }
-  const last = thread?.[thread.length - 1];
-  return last ? previewText(last.content) : '';
+  const outbound = p.direction === 'outbound' || (typeof p.status === 'string' && OUT_STATES.includes(p.status));
+  const status = outbound ? (typeof p.status === 'string' && OUT_STATES.includes(p.status) ? p.status : 'sent') : '';
+  const text = (v: unknown) => (typeof v === 'string' ? v.trim() : '');
+  for (const src of [p.content, p.message, p.type ? p : undefined]) {
+    if (src && typeof src === 'object' && renderContent(src).kind !== 'unknown') return { text: previewText(src, lookup), status, pending: false };
+  }
+  const direct = text(p.preview) || text(p.text) || text(p.body) || text(p.caption) || text((p.text as { body?: unknown } | undefined)?.body);
+  if (direct) return { text: direct, status, pending: false };
+  return { text: last ? previewText(last.content, lookup) : '', status, pending: false };
 };
 
 // Keyed by account: selection, filters, search and the open chat never carry over to another account.
@@ -97,6 +113,15 @@ function InboxBody() {
   const { colors, radius, shadow } = useTheme();
   const acct = useAccountsStore((s) => s.activeId);
   const inbox = useAccountInbox(acct);
+  // Sent templates are previewed with their text, as the chat draws them.
+  const lookup = useTemplateLookup();
+  // Stable for the screen's life: the body is keyed by account, and FlatList can't swap this handler.
+  const onViewable = useCallback(
+    ({ viewableItems }: { viewableItems: ListViewToken[] }) => {
+      if (acct) for (const v of viewableItems) if (v.item) ensureLastMessage(acct, v.item as Chat);
+    },
+    [acct],
+  );
   const [filter, setFilter] = useState<Filter>('all');
   const [search, setSearch] = useState('');
   const [results, setResults] = useState<Chat[] | null>(null);
@@ -217,6 +242,9 @@ function InboxBody() {
           setPulling(false);
         }}
         keyExtractor={(c) => c.id}
+        // Rows on screen fetch their newest message (template text, ticks) when the chat isn't loaded.
+        onViewableItemsChanged={onViewable}
+        viewabilityConfig={VIEWABILITY}
         contentContainerStyle={{ paddingBottom: TAB_BAR_SPACE + 24 }}
         onEndReached={async () => {
           if (serverMode) {
@@ -305,6 +333,7 @@ function InboxBody() {
           const unread = c.chat_metadata?.unread ?? 0;
           const flagged = unread > 0 || !!c.chat_metadata?.marked_as_unread;
           const isSelected = selected.has(c.id);
+          const preview = previewOf(c, inbox.threads[c.id], inbox.lasts?.[c.id], lookup);
           return (
             <Pressable
               onPress={() => (selecting ? toggleSelect(c) : desktop ? setOpenId(c.id) : router.push({ pathname: '/(app)/chat/[id]', params: { id: c.id } }))}
@@ -337,8 +366,13 @@ function InboxBody() {
                   </Text>
                 </Row>
                 <Row style={{ justifyContent: 'space-between' }}>
+                  {preview.status ? (
+                    <View style={{ marginEnd: 4 }}>
+                      <StatusTicks status={preview.status} pending={preview.pending} color={colors.textFaint} size={15} />
+                    </View>
+                  ) : null}
                   <Text variant="caption" tone={flagged ? 'default' : 'muted'} numberOfLines={1} style={{ flex: 1 }}>
-                    {previewOf(c, inbox.threads[c.id])}
+                    {preview.text}
                   </Text>
                   {flagged ? (
                     <View style={[styles.badge, { backgroundColor: colors.primary }]}>

@@ -27,6 +27,8 @@ export type AccountInbox = {
   threads: Record<string, ChatMessage[]>;
   /** chatId → no older history */
   threadDone: Record<string, boolean>;
+  /** chatId → its newest message, fetched for the chat list (template text, ticks) when the thread isn't loaded. */
+  lasts?: Record<string, ChatMessage>;
   /** The chat open on screen, so its arrivals are not counted unread. */
   openChat: string | null;
 };

@@ -24,6 +24,7 @@
     "owner": "Owner",
     "member": "Member",
     "whatsapp": "WhatsApp",
+    "call": "Call",
     "copy": "Copy",
     "errorTitle": "Something went wrong",
     "couldNotSave": "Could not save",

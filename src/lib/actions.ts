@@ -6,7 +6,7 @@ import * as Haptics from 'expo-haptics';
 import { router } from 'expo-router';
 import { Linking } from 'react-native';
 
-import { formatPhone, smsUri, whatsappUri } from './phone';
+import { formatPhone, smsUri, toDialable, whatsappUri } from './phone';
 import { showAlert } from '@/lib/dialog';
 
 export const openWhatsApp = async (phone: string, text?: string) => {
@@ -23,6 +23,15 @@ export const openSms = async (phone: string, body?: string) => {
     await Linking.openURL(smsUri(phone, body));
   } catch {
     showAlert('Messages not available');
+  }
+};
+
+/** Opens the phone's dialer with the number filled in (the user taps call there). */
+export const callPhone = async (phone: string) => {
+  try {
+    await Linking.openURL(`tel:${toDialable(phone)}`);
+  } catch {
+    showAlert('Calling not available');
   }
 };
 

@@ -7,7 +7,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { goBack } from '@/lib/nav';
-import { ArrowLeft, ChevronDown, Copy, FileText, MessageCircle, MoreHorizontal, Pencil, Trash2, X } from 'lucide-react-native';
+import { ArrowLeft, ChevronDown, Copy, FileText, MessageCircle, MoreHorizontal, Pencil, Phone, Trash2, X } from 'lucide-react-native';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, Pressable, RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
@@ -16,7 +16,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Avatar, Button, Card, EmptyState, GroupRow, Input, Loading, Row, Screen, Sheet, Text, UnderlineTabs, useOptionColor } from '@/components/ui';
 import { useFields, useLead, useUpdateLead } from '@/hooks/queries';
 import { useBoards, type Board } from '@/hooks/boards';
-import { copyPhone, messageOnWhatsApp } from '@/lib/actions';
+import { callPhone, copyPhone, messageOnWhatsApp } from '@/lib/actions';
 import { confirmAction, showAlert } from '@/lib/dialog';
 import { describeCrmError, isNotFound } from '@/services/crm/client';
 import { fieldLabel, formatFieldValue } from '@/services/crm/fields';
@@ -185,6 +185,13 @@ export function LeadView({ id, onClose }: { id: string; onClose?: () => void }) 
       ) : null}
 
       <Row gap={10} style={{ marginTop: 16 }}>
+        <ContactButton
+          label={t('common.call')}
+          icon={<Phone size={20} color="#fff" />}
+          bg="#2F80ED"
+          onPress={() => void callPhone(l.phone)}
+          disabled={!l.phone}
+        />
         <ContactButton
           label={t('common.whatsapp')}
           icon={<MessageCircle size={20} color="#fff" />}

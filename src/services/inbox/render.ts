@@ -159,9 +159,15 @@ export const templateMedia = (r: Rendered): Rendered | null =>
 export const templateButtonUrl = (r: Extract<Rendered, { kind: 'template' }>, url: string, index: number) =>
   url.replace(/\{\{\s*[a-zA-Z0-9_]+\s*\}\}/g, r.buttonValues[index] ?? '');
 
+/** A template's text with its values filled in; else 📋 and its name (or just "Template"). */
+const templatePreview = (r: Extract<Rendered, { kind: 'template' }>) => {
+  const body = r.parsed ? r.parsed.body.replace(/\{\{\s*([a-zA-Z0-9_]+)\s*\}\}/g, (_, k: string) => r.values[k] ?? '') : '';
+  return (r.fallback || body).replace(/\s+/g, ' ').trim() || `📋 ${r.name.replace(/_/g, ' ') || 'Template'}`;
+};
+
 /** One line for the chat list and notifications. */
-export const previewText = (content: unknown): string => {
-  const r = renderContent(content);
+export const previewText = (content: unknown, lookupTemplate?: (name: string, language: string) => Template | undefined): string => {
+  const r = renderContent(content, lookupTemplate);
   switch (r.kind) {
     case 'text':
       return r.text;
@@ -172,7 +178,7 @@ export const previewText = (content: unknown): string => {
     case 'contacts':
       return `👤 ${r.names.join(', ')}`;
     case 'template':
-      return r.fallback || (r.parsed ? r.parsed.body.replace(/\{\{\s*([a-zA-Z0-9_]+)\s*\}\}/g, (_, k: string) => r.values[k] ?? '') : `📋 ${r.name}`);
+      return templatePreview(r);
     case 'interactive':
       return r.body || r.header;
     case 'reply':

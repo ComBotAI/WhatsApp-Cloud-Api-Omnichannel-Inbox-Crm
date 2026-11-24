@@ -85,12 +85,17 @@ export function MessageMeta({
 }
 
 function Ticks({ m, color }: { m: ChatMessage; color: string }) {
+  return <StatusTicks status={m.status} pending={m.pending} color={color} />;
+}
+
+/** WhatsApp-style ticks: ✓ sent, ✓✓ delivered, blue ✓✓ read (also on the chat list). */
+export function StatusTicks({ status, pending, color, size = 14 }: { status: string; pending?: boolean; color: string; size?: number }) {
   const { colors } = useTheme();
-  if (m.pending) return <Clock size={12} color={color} />;
-  if (m.status === 'failed') return <CircleAlert size={13} color={colors.danger} />;
-  if (m.status === 'read') return <CheckCheck size={14} color="#53BDEB" />;
-  if (m.status === 'delivered') return <CheckCheck size={14} color={color} />;
-  return <Check size={14} color={color} />;
+  if (pending) return <Clock size={size - 2} color={color} />;
+  if (status === 'failed') return <CircleAlert size={size - 1} color={colors.danger} />;
+  if (status === 'read') return <CheckCheck size={size} color="#53BDEB" />;
+  if (status === 'delivered') return <CheckCheck size={size} color={color} />;
+  return <Check size={size} color={color} />;
 }
 
 /** Over media that is still uploading. */
@@ -274,7 +279,7 @@ function Body({
               </Text>
             </Pressable>
           ) : null}
-          <Text style={{ color: text, fontSize: 15, lineHeight: 21 }}>{r.fallback || Object.values(r.values).join(' · ')}</Text>
+          <LinkText text={r.fallback || Object.values(r.values).join(' · ')} style={{ color: text, fontSize: 15, lineHeight: 21 }} linkColor={link} />
         </View>
       );
     }
